@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function variables() {
+	screen_size=50
+}
+
+function init() {
+	if [ ! -z $1 ]; then
+		echo "---- $1 ----"
+	fi
+}
+
+function spacer() {
+	if [ ! -z $1 ]; then
+		param_length=`echo $1 | wc -c`
+		echo -e "---- $1 ----\c"
+		until [ `expr $param_length + 9` -gt $screen_size ]; do
+			echo -e "-\c";
+			let param_length++
+		done
+	else
+		x=${screen_size}
+		until [ $x -eq 0 ]; do
+			echo -e "-\c";
+			let screen_size--
+		done
+		echo "-"
+	fi
+}
+
+clear
+variables
+init
